@@ -260,9 +260,6 @@ async #ApplyDatabaseUpdates (pConnection, sDatabaseName)
 
    const sUpdatesDir = path.join (__dirname, 'Update');
    
-    console.log('__dirname =', __dirname);
-    console.log('sUpdatesDir =', sUpdatesDir);
-
    if (!fs.existsSync (sUpdatesDir))
    {
       console.log (`No 'Update' directory found. Skipping database updates.`);
