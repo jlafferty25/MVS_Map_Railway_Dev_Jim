@@ -258,7 +258,7 @@ async #ApplyDatabaseUpdates (pConnection, sDatabaseName)
    // Switch connection to the target database
    await pConnection.changeUser ({ database: sDatabaseName });
 
-   const sUpdatesDir = path.join (__dirname, 'update');
+   const sUpdatesDir = path.join (__dirname, 'Update');
 
    if (!fs.existsSync (sUpdatesDir))
    {
