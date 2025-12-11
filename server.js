@@ -227,7 +227,7 @@ class MVSF_Map
                   else
                   {
                      console.error (`Error executing statement ${i + 1}/${aStatements.length}:`, err.message);
-                     console.error (`Statement preview:`, sStatement.substring (0, 200) + '...');
+                     console.error (`Statement preview:`, sStatement.substring (0, 200) + '....');
                      throw err;
                   }
                }
