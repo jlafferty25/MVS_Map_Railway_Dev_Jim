@@ -15,6 +15,6 @@ INSERT INTO db_migrations (script_name, checksum, comment)
 SELECT '0000_init_update_table.sql', NULL, 'Baseline: DB existed before migrations system'
 WHERE NOT EXISTS (
     SELECT 1
-    FROM db_migrations
+    FROM db_update
     WHERE script_name = '0000_init_update_table.sql'
 );
