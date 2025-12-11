@@ -12,17 +12,13 @@
 
 CREATE TABLE IF NOT EXISTS Admin
 (
-   twRPersonaIx                        BIGINT            NOT NULL,
-
-   CONSTRAINT PK_Admin PRIMARY KEY
-   (
-      twRPersonaIx                     ASC
-   )
+   twRPersonaIx BIGINT NOT NULL,
+   CONSTRAINT PK_Admin PRIMARY KEY ( twRPersonaIx ASC )
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO Admin
-       ( twRPersonaIx )
-VALUES ( 1            );
+INSERT IGNORE INTO Admin ( twRPersonaIx )
+VALUES ( 1 );
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
