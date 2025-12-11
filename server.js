@@ -234,10 +234,13 @@ class MVSF_Map
             }
 
             console.log (`Database '${sDatabaseName}' created and imported successfully.`);
+			await this.#ApplyDatabaseUpdates (pConnection, sDatabaseName);
          }
          else
          {
             console.log (`Database '${sDatabaseName}' already exists. Skipping initialization.`);
+            await this.#ApplyDatabaseUpdates (pConnection, sDatabaseName);  // NEW
+
          }
 
          await pConnection.end ();
@@ -248,6 +251,81 @@ class MVSF_Map
          throw err;
       }
    }
+   
+   // Private helper on the same class
+async #ApplyDatabaseUpdates (pConnection, sDatabaseName)
+{
+   // Switch connection to the target database
+   await pConnection.changeUser ({ database: sDatabaseName });
+
+   const sUpdatesDir = path.join (__dirname, 'updates');
+
+   if (!fs.existsSync (sUpdatesDir))
+   {
+      console.log (`No 'updates' directory found. Skipping database updates.`);
+      return;
+   }
+
+   // Ensure tracking table exists
+   await pConnection.query (`
+      CREATE TABLE IF NOT EXISTS db_update (
+         id INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255) NOT NULL UNIQUE,
+         applied_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      )
+   `);
+
+   // Get list of already-applied updates
+   const [aAppliedRows] = await pConnection.query (`SELECT name FROM db_update`);
+   const oApplied = new Set (aAppliedRows.map (r => r.name));
+
+   // Get all .sql update files, sorted
+   const aFiles = fs.readdirSync (sUpdatesDir)
+      .filter (s => s.toLowerCase ().endsWith ('.sql'))
+      .sort (); // assumes lexical order = migration order (0001, 0002, ...)
+
+   for (const sFile of aFiles)
+   {
+      if (oApplied.has (sFile))
+      {
+         // Already applied
+         continue;
+      }
+
+      const sFullPath = path.join (sUpdatesDir, sFile);
+      console.log (`Applying database update: ${sFile}`);
+
+      const sContent = fs.readFileSync (sFullPath, 'utf8');
+      const aStatements = this.#ParseSQLWithDelimiters (sContent);
+
+      for (let i = 0; i < aStatements.length; i++)
+      {
+         const sStatement = aStatements[i];
+
+         if (!sStatement || sStatement.trim ().length === 0 || sStatement.trim ().match (/^--/))
+            continue;
+
+         try
+         {
+            await pConnection.query (sStatement);
+         }
+         catch (err)
+         {
+            console.error (`Error executing update '${sFile}' statement ${i + 1}/${aStatements.length}:`, err.message);
+            console.error (`Statement preview:`, sStatement.substring (0, 200) + '...');
+            throw err;
+         }
+      }
+
+      // Record that this update was applied
+      await pConnection.query (`INSERT INTO db_update (name) VALUES (?)`, [ sFile ]);
+
+      console.log (`Update '${sFile}' applied successfully.`);
+   }
+
+   console.log (`Database updates complete.`);
+}
+
 
    async onSQLReady (pMVSQL, err)
    {
