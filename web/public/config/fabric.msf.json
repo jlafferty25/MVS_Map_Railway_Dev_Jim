@@ -1,6 +1,6 @@
 {
    "map": {
-      "namespace": "Jim_Map/map",
+      "namespace": "jim_map1/map",
       "service": "MVIO",
       "require": "MVRP_Map",
       "connect": "secure=true;server=<PUBLIC_DOMAIN>:443;session=RP1",
