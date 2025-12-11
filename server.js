@@ -257,12 +257,13 @@ async #ApplyDatabaseUpdates (pConnection, sDatabaseName)
 {
    // Switch connection to the target database
    await pConnection.changeUser ({ database: sDatabaseName });
-
+    console.log('__dirname =', __dirname);
+    console.log('sUpdatesDir =', sUpdatesDir);
    const sUpdatesDir = path.join (__dirname, 'Update');
 
    if (!fs.existsSync (sUpdatesDir))
    {
-      console.log (`No 'updates' directory found. Skipping database updates.`);
+      console.log (`No 'Update' directory found. Skipping database updates.`);
       return;
    }
 
