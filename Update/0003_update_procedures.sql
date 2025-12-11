@@ -143,7 +143,6 @@ DROP PROCEDURE IF EXISTS set_RMRoot_RMTObject_Close;
 DROP PROCEDURE IF EXISTS set_RMRoot_RMTObject_Open;
 DROP PROCEDURE IF EXISTS init_DefaultScene;
 
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~                                                                                                                            ~~
