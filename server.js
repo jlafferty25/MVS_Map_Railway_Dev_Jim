@@ -270,14 +270,15 @@ async #ApplyDatabaseUpdates (pConnection, sDatabaseName)
    await pConnection.query (`
       CREATE TABLE IF NOT EXISTS db_update (
          id INT AUTO_INCREMENT PRIMARY KEY,
-         name VARCHAR(255) NOT NULL UNIQUE,
+         script_name VARCHAR(255) NOT NULL UNIQUE,
          applied_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       )
    `);
 
    // Get list of already-applied updates
-   const [aAppliedRows] = await pConnection.query (`SELECT name FROM db_update`);
-   const oApplied = new Set (aAppliedRows.map (r => r.name));
+   const [aAppliedRows] = await pConnection.query (`SELECT script_name FROM db_update`);
+   const oApplied = new Set (aAppliedRows.map (r => r.script_name));
+
 
    // Get all .sql update files, sorted
    const aFiles = fs.readdirSync (sUpdatesDir)
@@ -318,7 +319,7 @@ async #ApplyDatabaseUpdates (pConnection, sDatabaseName)
       }
 
       // Record that this update was applied
-      await pConnection.query (`INSERT INTO db_update (name) VALUES (?)`, [ sFile ]);
+      await pConnection.query (`INSERT INTO db_update (script_name) VALUES (?)`, [ sFile ]);
 
       console.log (`Update '${sFile}' applied successfully.`);
    }
