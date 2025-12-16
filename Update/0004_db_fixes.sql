@@ -6,6 +6,16 @@
 ~~                              Copyright 2023-2025 Metaversal Corporation. All rights reserved.                              ~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+DROP PROCEDURE IF EXISTS set_RMPObject_RMPObject_Close;
+DROP PROCEDURE IF EXISTS set_RMTObject_RMPObject_Close;
+DROP PROCEDURE IF EXISTS set_RMTObject_RMTObject_Close;
+DROP PROCEDURE IF EXISTS set_RMCObject_RMCObject_Close;
+DROP PROCEDURE IF EXISTS set_RMCObject_RMTObject_Close;
+DROP PROCEDURE IF EXISTS set_RMRoot_RMCObject_Close;
+DROP PROCEDURE IF EXISTS set_RMRoot_RMPObject_Close;
+DROP PROCEDURE IF EXISTS set_RMRoot_RMTObject_Close;
+
+
 DELIMITER $$
 
 CREATE PROCEDURE set_RMPObject_RMPObject_Close
