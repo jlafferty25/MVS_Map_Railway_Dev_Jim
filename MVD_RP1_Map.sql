@@ -64,6 +64,7 @@ VALUES
   ('0001_create_admin_table.sql',   NULL, 'Baseline full build includes 0001'),
   ('0002_update_functions.sql',     NULL, 'Baseline full build includes 0002'),
   ('0003_update_procedures.sql',    NULL, 'Baseline full build includes 0003');
+  ('0004_db_fixes.sql',             NULL, 'Baseline full build includes 0004');
 
 
 
@@ -3731,9 +3732,9 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMPObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMPOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMPObjectIx_Close;
+                   FROM RMPObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMPOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMPObjectIx_Close;
 
                      IF twRMPObjectIx_Close <= 0
                    THEN
@@ -7618,9 +7619,9 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMTObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMPObjectIx_Close;
+                   FROM RMTObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMPObjectIx_Close;
 
                      IF twRMPObjectIx_Close <= 0
                    THEN
@@ -7888,14 +7889,14 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMTObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
+                   FROM RMTObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
 
                  SELECT COUNT(*) + nCount INTO nCount
-                   FROM RMPObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
+                   FROM RMPObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
 
                      IF twRMTObjectIx_Close <= 0
                    THEN
@@ -11115,14 +11116,14 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMCObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMCOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMCObjectIx_Close;
+                   FROM RMCObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMCOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMCObjectIx_Close;
 
                  SELECT COUNT(*) + nCount INTO nCount
-                   FROM RMTObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMCOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMCObjectIx_Close;
+                   FROM RMTObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMCOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMCObjectIx_Close;
 
                      IF twRMCObjectIx_Close <= 0
                    THEN
@@ -11400,9 +11401,9 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMTObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
+                   FROM RMTObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
 
                      IF twRMTObjectIx_Close <= 0
                    THEN
@@ -13234,9 +13235,9 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMCObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMCOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMCObjectIx_Close;
+                   FROM RMCObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMCOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMCObjectIx_Close;
 
                      IF twRMCObjectIx_Close <= 0
                    THEN
@@ -13514,9 +13515,9 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMPObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMPOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMPObjectIx_Close;
+                   FROM RMPObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMPOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMPObjectIx_Close;
 
                      IF twRMPObjectIx_Close <= 0
                    THEN
@@ -13784,9 +13785,9 @@ BEGIN
             IF nError = 0
           THEN
                  SELECT COUNT(*) INTO nCount
-                   FROM RMTObject
-                  WHERE ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
-                    AND ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
+                   FROM RMTObject AS o
+                  WHERE o.ObjectHead_Parent_wClass     = SBO_CLASS_RMTOBJECT
+                    AND o.ObjectHead_Parent_twObjectIx = twRMTObjectIx_Close;
 
                      IF twRMTObjectIx_Close <= 0
                    THEN
@@ -14115,4 +14116,3 @@ DELIMITER ;
 CALL init_DefaultScene ();
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
