@@ -63,7 +63,7 @@ VALUES
   ('0000_init_db_update_table.sql', NULL, 'Baseline full build includes 0000'),
   ('0001_create_admin_table.sql',   NULL, 'Baseline full build includes 0001'),
   ('0002_update_functions.sql',     NULL, 'Baseline full build includes 0002'),
-  ('0003_update_procedures.sql',    NULL, 'Baseline full build includes 0003');
+  ('0003_update_procedures.sql',    NULL, 'Baseline full build includes 0003'),
   ('0004_db_fixes.sql',             NULL, 'Baseline full build includes 0004');
 
 
